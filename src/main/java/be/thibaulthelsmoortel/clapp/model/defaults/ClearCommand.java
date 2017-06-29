@@ -1,5 +1,6 @@
-package be.thibaulthelsmoortel.clapp.model;
+package be.thibaulthelsmoortel.clapp.model.defaults;
 
+import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
 
 /**

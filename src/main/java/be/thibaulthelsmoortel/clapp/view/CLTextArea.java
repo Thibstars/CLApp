@@ -1,6 +1,6 @@
 package be.thibaulthelsmoortel.clapp.view;
 
-import be.thibaulthelsmoortel.clapp.model.ClearCommand;
+import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
 import lombok.extern.log4j.Log4j2;
 
