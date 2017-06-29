@@ -1,8 +1,9 @@
 package be.thibaulthelsmoortel.clapp.view;
 
-import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
+import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
@@ -34,7 +35,11 @@ public class CLTextArea extends JTextArea {
                 if (e.getKeyChar() == '\n') {
                     try {
                         String command = getText().substring(getText().lastIndexOf(COMMAND_START) + 1, getText().length() - 1);
-                        CommandExecutor.execute(command);
+                        if (StringUtils.isNotEmpty(command) && !command.equals("\n")) {
+                            CommandExecutor.execute(command);
+                        } else {
+                            setText(getText(0, getText().lastIndexOf('\n')));
+                        }
                     } catch (IllegalArgumentException e1) {
                         setText(getText() + e1.getMessage() + "\n" + COMMAND_START);
                     } catch (Exception e1) {

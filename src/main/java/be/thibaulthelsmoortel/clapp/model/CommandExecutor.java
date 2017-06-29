@@ -39,7 +39,7 @@ public class CommandExecutor {
         for (Command c : commandSet) {
             if (c.getCommand().equals(command)) return c;
         }
-        throw new IllegalArgumentException(String.format("Command: %s not found.", command));
+        throw new IllegalArgumentException(String.format("Command not found: %s", command));
     }
 
     public static Object execute(Command command) throws Exception {
