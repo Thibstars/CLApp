@@ -45,6 +45,9 @@ public class CLTextArea extends JTextArea {
                     } catch (Exception e1) {
                         log.error(e1.getMessage(), e1);
                     }
+                } else if (e.getKeyChar() == '\b' && getCaretPosition() == 0) {
+                    // Prevent removal
+                    setText(COMMAND_START);
                 }
             }
         });
