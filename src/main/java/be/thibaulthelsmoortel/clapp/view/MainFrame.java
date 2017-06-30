@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
     }
 
     private void addComponents() {
-        add(clTextArea, BorderLayout.CENTER);
+        add(new JScrollPane(clTextArea), BorderLayout.CENTER);
     }
 
     private void addListeners() {
