@@ -15,6 +15,13 @@ public final class CommandExecutor {
 
     private static Set<Command> commandSet = new HashSet<>();
 
+    /**
+     * Adds the given command to the commandSet. A command must be added prior to first execution.
+     *
+     * @param command the command to add
+     * @return <tt>true</tt> if this set did not already contain the specified
+     * element
+     */
     public static boolean add(Command command) {
         return commandSet.add(command);
     }
@@ -36,6 +43,13 @@ public final class CommandExecutor {
         throw new IllegalArgumentException(String.format("Command not found: %s", command));
     }
 
+    /**
+     * Executes a given command.
+     *
+     * @param command the command to execute
+     * @return the command execution result
+     * @throws Exception if unable to compute a result
+     */
     private static Object execute(Command command) throws Exception {
         if (command == null) throw new IllegalArgumentException("Command must not be null.");
         if (command.getCallable() == null) throw new IllegalArgumentException("Callable must not be null.");
@@ -48,6 +62,13 @@ public final class CommandExecutor {
         return result;
     }
 
+    /**
+     * Executes a command by its given command name.
+     *
+     * @param commandString the command name of the command to execute
+     * @return the command execution result
+     * @throws Exception if unable to compute a result
+     */
     public static Object execute(String commandString) throws Exception {
         String[] words = commandString.split(" ");
         Command command = find(words[0]);

@@ -21,15 +21,32 @@ public class Command {
     // Object list serving as input parameters. Not to be confused with args, being command argument strings.
     private List<Object> input;
 
+    /**
+     * Class constructor initialising command and callable.
+     *
+     * @param command  the command name
+     * @param callable the callable to be ran upon execution
+     */
     public Command(String command, Callable callable) {
         this.command = command;
         this.callable = callable;
     }
 
+    /**
+     * Class constructor initialising command. Use this constructor when you need to access the command in your callable.
+     *
+     * NOTE: You will have to set the callable afterwards in order to make the command executable.
+     * @param command the command name
+     */
     public Command(String command) {
         this.command = command;
     }
 
+    /**
+     * Adds arguments to the command.
+     *
+     * @param args the args to add
+     */
     public void addArgs(String... args) {
         if (this.args == null) {
             this.args = new ArrayList<>();
@@ -37,6 +54,11 @@ public class Command {
         Collections.addAll(this.args, args);
     }
 
+    /**
+     * Adds input objects to the command.
+     *
+     * @param o the input objects to add
+     */
     public void addInput(Object... o) {
         if (input == null) {
             input = new ArrayList<>();
