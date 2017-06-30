@@ -11,15 +11,9 @@ import java.util.Set;
  * @author Thibault Helsmoortel
  */
 @Log4j2
-public class CommandExecutor {
+public final class CommandExecutor {
 
-    private static CommandExecutor ourInstance = new CommandExecutor();
-
-    private static Set<Command> commandSet;
-
-    private CommandExecutor() {
-        commandSet = new HashSet<>();
-    }
+    private static Set<Command> commandSet = new HashSet<>();
 
     public static boolean add(Command command) {
         return commandSet.add(command);
@@ -42,24 +36,24 @@ public class CommandExecutor {
         throw new IllegalArgumentException(String.format("Command not found: %s", command));
     }
 
-    public static Object execute(Command command) throws Exception {
+    private static Object execute(Command command) throws Exception {
         if (command == null) throw new IllegalArgumentException("Command must not be null.");
         if (command.getCallable() == null) throw new IllegalArgumentException("Callable must not be null.");
 
         log.debug("Executing command: {}.", command);
-        return command.getCallable().call();
+        Object result = command.getCallable().call();
+        // Reset args and inputs
+        command.setArgs(null);
+        command.setInput(null);
+        return result;
     }
 
-    public static Object execute(String command) throws Exception {
-        return execute(find(command));
-    }
-
-    public static CommandExecutor getInstance() {
-        return ourInstance;
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
+    public static Object execute(String commandString) throws Exception {
+        String[] words = commandString.split(" ");
+        Command command = find(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            command.addArgs(words[i]);
+        }
+        return execute(command);
     }
 }

@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
 
     public ClearCommand(CLTextArea clTextArea) {
         super("cls", () -> {
-            clTextArea.setText(CLTextArea.COMMAND_START);
+            clTextArea.setText("");
             return null;
         });
     }
