@@ -3,6 +3,7 @@ package be.thibaulthelsmoortel.clapp.view;
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
 import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
+import be.thibaulthelsmoortel.clapp.model.defaults.CmdCommand;
 import be.thibaulthelsmoortel.clapp.model.defaults.EchoCommand;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
@@ -91,6 +92,7 @@ public class CLTextArea extends JTextArea {
     private void addCommands() {
         CommandExecutor.add(new ClearCommand(this));
         CommandExecutor.add(new EchoCommand(this));
+        CommandExecutor.add(new CmdCommand(this));
     }
 
     private void disablePreviousText() {
