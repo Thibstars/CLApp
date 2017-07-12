@@ -67,7 +67,7 @@ public class CLTextArea extends JTextArea {
                 } else if (e.getKeyChar() == '\b' && getCaretPosition() == 0) {
                     // Prevent removal on first line
                     setText(COMMAND_START);
-                } else if (e.getKeyChar() == '\b' && getCaretPosition() == getText().lastIndexOf(lastLine) + 1) {
+                } else if (e.getKeyChar() == '\b' && getCaretPosition() == getText().lastIndexOf(lastLine) + 1 && !getText().equals(COMMAND_START)) {
                     // Prevent removal on next lines
                     setText(getText() + COMMAND_START);
                 }
