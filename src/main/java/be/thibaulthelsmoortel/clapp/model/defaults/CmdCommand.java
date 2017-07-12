@@ -20,11 +20,11 @@ public class CmdCommand extends Command {
         this.clTextArea = clTextArea;
         setCallable(() -> {
             StringBuilder fullCommand = new StringBuilder();
-            for (String s : getArgs()) {
-                fullCommand.append(s).append(" ");
+            if (getArgs() != null) {
+                for (String s : getArgs()) {
+                    fullCommand.append(" ").append(s);
+                }
             }
-            fullCommand.deleteCharAt(fullCommand.length() - 1); // Delete trailing space
-
             return execCmd(fullCommand.toString());
         });
     }

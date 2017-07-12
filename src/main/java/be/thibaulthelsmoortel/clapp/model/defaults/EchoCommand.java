@@ -19,9 +19,8 @@ public class EchoCommand extends Command {
             if (getArgs() != null) {
                 StringBuilder args = new StringBuilder();
                 for (String s : getArgs()) {
-                    args.append(s).append(" ");
+                    args.append(" ").append(s);
                 }
-                args.deleteCharAt(args.length() - 1); // Delete trailing space
                 echo = String.format("%s", args.toString());
                 if (echo.startsWith("\"") && echo.endsWith("\"")) {
                     echo = echo.substring(1, echo.length() - 1);
