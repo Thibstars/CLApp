@@ -62,6 +62,7 @@ public final class CommandExecutor {
         histCommand.setArgs(command.getArgs());
         histCommand.setInput(command.getInput());
         CommandHistory.add(histCommand);
+        CommandHistory.resetScroller();
 
         // Reset args and inputs
         command.setArgs(null);
