@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -28,6 +29,8 @@ public class CLTextArea extends JTextArea {
     public CLTextArea() {
         super();
         initLayout();
+        disableKeys();
+        customizeKeys();
         addCommands();
         addListeners();
     }
@@ -72,6 +75,33 @@ public class CLTextArea extends JTextArea {
         });
     }
 
+    private void disableKeys() {
+        // Remove default key behavior
+        String[] keys = {"UP", "DOWN"};
+        for (String key : keys) {
+            getInputMap().put(KeyStroke.getKeyStroke(key), "none");
+        }
+    }
+
+    private void customizeKeys() {
+        // Apply custom key behavior
+        InputMap inputMap = getInputMap();
+        KeyStroke up = KeyStroke.getKeyStroke("UP");
+        KeyStroke down = KeyStroke.getKeyStroke("DOWN");
+        KeyStroke esc = KeyStroke.getKeyStroke("ESCAPE");
+        getActionMap().put(up, new HistoryAction(this, HistoryAction.Type.UP));
+        getActionMap().put(down, new HistoryAction(this, HistoryAction.Type.DOWN));
+        getActionMap().put(esc, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setText(getText().substring(0, getText().lastIndexOf("\n" + COMMAND_START) + 2));
+            }
+        });
+        inputMap.put(up, up);
+        inputMap.put(down, down);
+        inputMap.put(esc, esc);
+    }
+
     private String getLastLine() {
         return getText().contains("\n") ? getText().substring(getText().lastIndexOf('\n')) : getText();
     }
@@ -101,5 +131,11 @@ public class CLTextArea extends JTextArea {
 
     private void enableEditing() {
         ((AbstractDocument) this.getDocument()).setDocumentFilter(null);
+    }
+
+    public void setCommandText(String commandText) {
+        enableEditing();
+        setText(getText().substring(0, getText().lastIndexOf("\n" + COMMAND_START) + 1));
+        append(COMMAND_START + commandText);
     }
 }

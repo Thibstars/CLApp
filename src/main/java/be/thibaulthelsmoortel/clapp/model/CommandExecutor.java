@@ -56,6 +56,13 @@ public final class CommandExecutor {
 
         log.debug("Executing command: {}.", command);
         Object result = command.getCallable().call();
+
+        // Create copy of command and store it in history
+        Command histCommand = new Command(command.getCommand(), command.getCallable());
+        histCommand.setArgs(command.getArgs());
+        histCommand.setInput(command.getInput());
+        CommandHistory.add(histCommand);
+
         // Reset args and inputs
         command.setArgs(null);
         command.setInput(null);

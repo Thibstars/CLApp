@@ -1,6 +1,7 @@
 package be.thibaulthelsmoortel.clapp.model;
 
 import lombok.Data;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,6 +65,21 @@ public class Command {
             input = new ArrayList<>();
         }
         Collections.addAll(input, o);
+    }
+
+    /**
+     * Returns the full command string, including the arguments.
+     *
+     * @return the full command string, including the arguments
+     */
+    public String getFullStringCommand() {
+        StringBuilder full = new StringBuilder(command);
+        if (CollectionUtils.isNotEmpty(args)) {
+            for (String s : args) {
+                full.append(" ").append(s);
+            }
+        }
+        return full.toString();
     }
 
     @Override
