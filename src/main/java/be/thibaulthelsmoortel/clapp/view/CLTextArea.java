@@ -5,6 +5,7 @@ import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
 import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import be.thibaulthelsmoortel.clapp.model.defaults.CmdCommand;
 import be.thibaulthelsmoortel.clapp.model.defaults.EchoCommand;
+import be.thibaulthelsmoortel.clapp.model.defaults.IsPalindromeCommand;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +25,7 @@ import java.awt.event.KeyEvent;
 @Log4j2
 public class CLTextArea extends JTextArea {
 
-    public static final String COMMAND_START = ">";
+    private static final String COMMAND_START = ">";
 
     public CLTextArea() {
         super();
@@ -123,6 +124,7 @@ public class CLTextArea extends JTextArea {
         CommandExecutor.add(new ClearCommand(this));
         CommandExecutor.add(new EchoCommand(this));
         CommandExecutor.add(new CmdCommand(this));
+        CommandExecutor.add(new IsPalindromeCommand(this));
     }
 
     private void disablePreviousText() {
