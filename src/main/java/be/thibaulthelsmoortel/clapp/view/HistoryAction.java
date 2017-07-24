@@ -1,5 +1,6 @@
 package be.thibaulthelsmoortel.clapp.view;
 
+import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.model.CommandHistory;
 
 import javax.swing.*;
@@ -32,11 +33,17 @@ public class HistoryAction extends AbstractAction {
     }
 
     private void showPreviousCommand() {
-        clTextArea.setCommandText(CommandHistory.getPrevious().getFullStringCommand());
+        Command previous = CommandHistory.getPrevious();
+        if (previous != null) {
+            clTextArea.setCommandText(previous.getFullStringCommand());
+        }
     }
 
     private void showNextCommand() {
-        clTextArea.setCommandText(CommandHistory.getNext().getFullStringCommand());
+        Command next = CommandHistory.getNext();
+        if (next != null) {
+            clTextArea.setCommandText(next.getFullStringCommand());
+        }
     }
 
     public enum Type {
