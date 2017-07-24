@@ -18,17 +18,21 @@ public class BrowseCommand extends Command {
     public BrowseCommand(CLTextArea clTextArea) {
         super("browse");
         setCallable(() -> {
-            String output = "";
+            StringBuilder output = new StringBuilder();
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE) && getArgs() != null) {
-                try {
-                    Desktop.getDesktop().browse(new URI(getArgs().get(0)));
-                    output = String.format("Opened '%s' in the default browser.", getArgs().get(0));
-                } catch (IOException | URISyntaxException e) {
-                    output = e.getLocalizedMessage();
+                for (String arg : getArgs()) {
+                    try {
+                        Desktop.getDesktop().browse(new URI(arg));
+                        output.append(String.format("Opened '%s' in the default browser.", arg));
+                    } catch (IOException | URISyntaxException e) {
+                        output.append(e.getLocalizedMessage());
+                    }
+                    output.append("\n");
                 }
+
             }
-            clTextArea.append(output);
-            return output;
+            clTextArea.append(output.toString());
+            return output.toString();
         });
     }
 }
