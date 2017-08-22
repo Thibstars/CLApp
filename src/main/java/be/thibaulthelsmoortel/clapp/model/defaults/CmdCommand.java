@@ -2,6 +2,7 @@ package be.thibaulthelsmoortel.clapp.model.defaults;
 
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -25,11 +26,19 @@ public class CmdCommand extends Command {
                     fullCommand.append(" ").append(s);
                 }
             }
-            return execCmd(fullCommand.toString());
+            try {
+                return execCmd(fullCommand.toString());
+            } catch (RuntimeException e) {
+                clTextArea.append(e.getMessage());
+                return e.getMessage();
+            }
         });
     }
 
     private String execCmd(String cmd) {
+        if (!StringUtils.containsIgnoreCase(System.getProperty("os.name"), "windows")) {
+            throw new RuntimeException("Current operating system does not support cmd.");
+        }
         Scanner s;
         try {
             s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
