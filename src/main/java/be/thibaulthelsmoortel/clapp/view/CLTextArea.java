@@ -123,6 +123,7 @@ public class CLTextArea extends JTextArea {
         CommandExecutor.add(new CmdCommand(this));
         CommandExecutor.add(new IsPalindromeCommand(this));
         CommandExecutor.add(new BrowseCommand(this));
+        CommandExecutor.add(new SysPropsCommand(this));
     }
 
     private void disablePreviousText() {
