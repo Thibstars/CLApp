@@ -10,7 +10,6 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -22,7 +21,7 @@ import java.awt.event.KeyEvent;
 @Log4j2
 public class CLTextArea extends JTextArea {
 
-    private static final String COMMAND_START = ">";
+    static final String COMMAND_START = ">";
 
     public CLTextArea() {
         super();
@@ -87,14 +86,9 @@ public class CLTextArea extends JTextArea {
         KeyStroke up = KeyStroke.getKeyStroke("UP");
         KeyStroke down = KeyStroke.getKeyStroke("DOWN");
         KeyStroke esc = KeyStroke.getKeyStroke("ESCAPE");
-        getActionMap().put(up, new HistoryAction(this, HistoryAction.Type.UP));
-        getActionMap().put(down, new HistoryAction(this, HistoryAction.Type.DOWN));
-        getActionMap().put(esc, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setText(getText().substring(0, getText().lastIndexOf("\n" + COMMAND_START) + 2));
-            }
-        });
+        getActionMap().put(up, new HistoryAction(this, HistoryAction.ActionType.UP));
+        getActionMap().put(down, new HistoryAction(this, HistoryAction.ActionType.DOWN));
+        getActionMap().put(esc, new HistoryAction(this, HistoryAction.ActionType.ESC));
         inputMap.put(up, up);
         inputMap.put(down, down);
         inputMap.put(esc, esc);
