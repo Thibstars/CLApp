@@ -2,7 +2,7 @@ package be.thibaulthelsmoortel.clapp.view;
 
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
-import be.thibaulthelsmoortel.clapp.model.defaults.*;
+import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,7 +28,6 @@ public class CLTextArea extends JTextArea {
         initLayout();
         disableKeys();
         customizeKeys();
-        addCommands();
         addListeners();
     }
 
@@ -109,15 +108,6 @@ public class CLTextArea extends JTextArea {
         setForeground(Color.WHITE);
         setFont(new Font("sans-serif", Font.PLAIN, 14));
         setText(COMMAND_START);
-    }
-
-    private void addCommands() {
-        CommandExecutor.add(new ClearCommand(this));
-        CommandExecutor.add(new EchoCommand(this));
-        CommandExecutor.add(new CmdCommand(this));
-        CommandExecutor.add(new IsPalindromeCommand(this));
-        CommandExecutor.add(new BrowseCommand(this));
-        CommandExecutor.add(new UUIDCommand(this));
     }
 
     private void disablePreviousText() {

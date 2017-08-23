@@ -1,5 +1,6 @@
 package be.thibaulthelsmoortel.clapp.model.defaults;
 
+import be.thibaulthelsmoortel.clapp.annotations.RegisterCommand;
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import java.util.Scanner;
  *
  * @author Thibault Helsmoortel
  */
+@RegisterCommand
 public class CmdCommand extends Command {
 
     private final CLTextArea clTextArea;
