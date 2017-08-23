@@ -36,6 +36,6 @@ public class MainFrame extends JFrame {
     }
 
     private void initLayout() {
-        clTextArea = new CLTextArea();
+        clTextArea = ViewConstants.CL_TEXT_AREA;
     }
 }

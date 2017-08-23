@@ -1,5 +1,6 @@
 package be.thibaulthelsmoortel.clapp.model.defaults;
 
+import be.thibaulthelsmoortel.clapp.annotations.RegisterCommand;
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
 
@@ -8,6 +9,7 @@ import be.thibaulthelsmoortel.clapp.view.CLTextArea;
  *
  * @author Thibault Helsmoortel
  */
+@RegisterCommand
 public class IsPalindromeCommand extends Command {
 
     public IsPalindromeCommand(CLTextArea clTextArea) {

@@ -1,5 +1,6 @@
 package be.thibaulthelsmoortel.clapp.model.defaults;
 
+import be.thibaulthelsmoortel.clapp.annotations.RegisterCommand;
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
 
@@ -13,6 +14,7 @@ import java.net.URISyntaxException;
  *
  * @author Thibault Helsmoortel
  */
+@RegisterCommand
 public class BrowseCommand extends Command {
 
     public BrowseCommand(CLTextArea clTextArea) {

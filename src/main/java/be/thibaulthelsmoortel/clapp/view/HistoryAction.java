@@ -11,23 +11,27 @@ import java.awt.event.ActionEvent;
  */
 public class HistoryAction extends AbstractAction {
 
-
     private final CLTextArea clTextArea;
-    private final Type type;
+    private final ActionType actionType;
 
-    public HistoryAction(CLTextArea clTextArea, Type type) {
+    public HistoryAction(CLTextArea clTextArea, ActionType actionType) {
         this.clTextArea = clTextArea;
-        this.type = type;
+        this.actionType = actionType;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (type) {
+        switch (actionType) {
             case UP:
                 showPreviousCommand();
                 break;
             case DOWN:
                 showNextCommand();
+                break;
+            case ESC:
+                // No history browsing should be done here
+                clTextArea.setText(clTextArea.getText().substring(0, clTextArea.getText().lastIndexOf("\n" + CLTextArea.COMMAND_START) + 2));
+                CommandHistory.resetScroller();
                 break;
         }
     }
@@ -46,7 +50,7 @@ public class HistoryAction extends AbstractAction {
         }
     }
 
-    public enum Type {
-        UP, DOWN
+    public enum ActionType {
+        UP, DOWN, ESC
     }
 }

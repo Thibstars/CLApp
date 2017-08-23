@@ -1,5 +1,6 @@
 package be.thibaulthelsmoortel.clapp.model.defaults;
 
+import be.thibaulthelsmoortel.clapp.annotations.RegisterCommand;
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.view.CLTextArea;
 import lombok.extern.log4j.Log4j2;
@@ -10,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
  * @author Thibault Helsmoortel
  */
 @Log4j2
+@RegisterCommand
 public class EchoCommand extends Command {
 
     public EchoCommand(CLTextArea clTextArea) {
