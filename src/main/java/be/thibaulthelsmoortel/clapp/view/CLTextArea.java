@@ -2,7 +2,7 @@ package be.thibaulthelsmoortel.clapp.view;
 
 import be.thibaulthelsmoortel.clapp.model.Command;
 import be.thibaulthelsmoortel.clapp.model.CommandExecutor;
-import be.thibaulthelsmoortel.clapp.model.defaults.*;
+import be.thibaulthelsmoortel.clapp.model.defaults.ClearCommand;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,7 +10,6 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -109,6 +108,7 @@ public class CLTextArea extends JTextArea {
         setForeground(Color.WHITE);
         setFont(new Font("sans-serif", Font.PLAIN, 14));
         setText(COMMAND_START);
+        setCaretPosition(COMMAND_START.length());
     }
 
     private void disablePreviousText() {
